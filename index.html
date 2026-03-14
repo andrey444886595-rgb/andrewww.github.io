@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+*{
+    box-sizing: border-box;
+}
+
+body
+{
+    background-color:bisque;
+    padding: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+section
+{
+    max-width: 1000px;
+    margin: auto;
+
+}
+
+h1{
+    font-size: 100px;
+    word-break: break-all;
+}
+.row
+{
+    margin: 8px -16px;
+
+
+}
+
+.row, .row> .column
+{
+    padding: 8px;
+
+}
+
+.column
+{
+    float: left;
+    width: 25%;
+}
+.row::after
+{
+    content: "";
+    display: table;
+    clear: both;
+}
+ 
+.content
+{
+    padding: 10px;
+    background-color:aliceblue;
+}
+
+img
+{
+    width: 100%;
+}
+
+@media screen and (max-width:900px) 
+{
+    .column
+    {
+
+    
+  width: 50%;
+    } 
+}
+@media screen and (max-width:600px) 
+{
+    .column
+    {
+
+    
+  width: 100%;
+    } 
+}
+
+
+
+</style>
+</head>
+<body>
+<section>
+<h1>Интересные факты о котах</h1>
+<hr>
+<h2>Портфолио фото котов</h2>
+<div class="row">
+    <div class="column">
+        <div class="content">
+<a target="_blank" href="98.jpg">
+    <img src="98.jpg">
+</a>
+<h3>Коты факт 1</h3>
+<p>
+Первые представители кошачьих появились около 12 млн лет назад.
+
+    
+</p>
+
+
+
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="content">
+<a target="_blank" href="4343.jpg">
+    <img src="4343.jpg">
+</a>
+<h3>Коты факт 2</h3>
+<p>
+Сейчас в мире живет примерно 500 млн домашних кошек.
+  
+</p>
+
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="content">
+<a target="_blank" href="123.jpg">
+    <img src="123.jpg">
+</a>
+<h3>Коты факт 3</h3>
+<p>
+Домашняя кошка проводит во сне около 70% своей жизни.   
+</p>
+
+
+
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="content">
+<a target="_blank" href="432432.jpg">
+    <img src="432432.jpg">
+</a>
+<h3>Коты факт 4</h3>
+<p>
+ Если истребить всех кошек, человечеству грозит нашествие крыс и, как следствие, эпидемия чумы.
+
+    
+</p>
+
+
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+ 
+        <div class="content">
+<a target="_blank" href="654654.jpg">
+    <img src="654654.jpg">
+</a>
+<h3>Коты факт 5</h3>
+<p>
+К «оригинальным» породам кошек можно отнести только около сорока, остальные 150+ пород были выведены искусственно путем скрещивания.
+
+    
+</p>
+
+
+
+        
+    </div>
+</section>
+
+</body>
+</html>  
