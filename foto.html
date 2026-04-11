@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фотогалерея фантастических существ</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* 2. Шапка сайта */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+/* 3. Фильтры */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+}
+
+.filter-btn:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: #2ecc71;
+    box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+}
+
+/* 4. Галерея */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 5. Карточка изображения */
+.photo-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.photo-card:hover {
+    transform: translateY(-10px);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.card-info {
+    padding: 15px;
+}
+
+.card-info h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.like-btn.liked {
+    color: #ff0000;
+}
+
+.likes-count {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* 6. Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 5px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* 7. Подвал */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    color: #7f8c8d;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+ <h1>Моя фотогалерея</h1>
+ <p>Кликай на картинки,ставь лайки и выбирай категории</p> 
+</header>
+<main>
+     <div class="filters">
+        <button class="filter-btn active" data-filter="all">Все фото</button>
+        <button class="filter-btn active" data-filter="dragon">Драконы</button>
+        <button class="filter-btn active" data-filter="magic">Магические существа</button>
+        <button class="filter-btn active" data-filter="ufo">Инопланетяне</button>
+     </div>
+
+<div class="gallery">
+
+
+
+</div>
+</main>
+
+<div class="modal" id="imageModal">
+   </div>
+<footer>
+    <p>Создано с 😍</p>
+</footer>
+<script>
+const images=[
+    {
+id:1,
+title:"Красный дракон",
+category:"dragon",
+url:"55555.jpg",
+likes:0
+    },
+
+    {
+id:2,
+title:"Синий дракон",
+category:"dragon",
+url:"blueDragon.jpg",
+likes:0
+    },
+
+    {
+id:3,
+title:"Зеленый дракон",
+category:"dragon",
+url:"greenDragon.jpg",
+likes:0
+    },
+       {
+id:4,
+title:"Краcный инопланетянин",
+category:"ufo",
+url:"redInoplanetyan.jpg",
+likes:0
+    },
+
+       {
+id:5,
+title:"Зеленый инопланетянин",
+category:"ufo",
+url:"654789.jpg",
+likes:0
+    },
+
+       {
+id:6,
+title:"Синий инопланетянин",
+category:"ufo",
+url:"345543.jpg",
+likes:0
+    },
+
+       {
+id:7,
+title:"Желтое магическое существо",
+category:"magic",
+url:"99999.jpg",
+likes:0
+    },
+       {
+id:8,
+title:"Магическое синее существо",
+category:"magic",
+url:"6565.jpg",
+likes:0
+    },
+       {
+id:9,
+title:"Белое магическое существо",
+category:"magic",
+url:"whiteMagic.jpg",
+likes:0
+    },
+];
+
+
+let currentFilter="all";
+const gallery=document.querySelector(".gallery");
+const filterButtons=document.querySelectorAll(".filter-btn");
+const modal=document.getElementById("imageModal");
+
+function createCard(image) {
+    return `
+        <div class="photo-card" data-category="${image.category}">
+            <img src="${image.url}" alt="${image.title}" onclick="openModal(${image.id})">
+            <div class="card-info">
+                <h3>${image.title}</h3>
+                <div>
+                    <button class="like-btn" onclick="toggleLike(${image.id})">
+                        ❤️
+                    </button>
+                    <span class="likes-count">${image.likes}</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderGallery()
+{
+gallery.innerHTML="";
+const filteredImages=images.filter(image=>
+{
+    if(currentFilter=="all") return true;
+    return image.category==currentFilter;
+}
+);
+filteredImages.forEach(image=>
+{
+    gallery.innerHTML+=createCard(image);
+}
+);
+}
+
+function setFilter(filter)
+{
+
+    currentFilter=filter;
+    filterButtons.forEach(btn=>
+        {
+           btn.classList.remove("active") ;
+           if(btn.dataset.filter==filter)
+           {
+            btn.classList.add("active");
+           }
+        }
+    );
+    renderGallery();
+}
+filterButtons.forEach(button=>
+{
+    button.addEventListener("click",()=>
+{
+const filter=button.dataset.filter;
+setFilter(filter);
+});
+});
+
+// 7. ФУНКЦИЯ ДЛЯ ЛАЙКОВ
+function toggleLike(imageId) {
+    // Находим картинку по id
+    const image = images.find(img => img.id === imageId);
+    
+    // Увеличиваем или уменьшаем лайки
+    if (image.likes === 0) {
+        image.likes = 1;
+    } else {
+        image.likes = 0;
+    }
+    
+    // Перерисовываем галерею
+    renderGallery();
+}
+
+// 8. ФУНКЦИЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА
+function openModal(imageId) {
+    const image = images.find(img => img.id === imageId);
+    
+    // Создаем содержимое модального окна
+    modal.innerHTML = `
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img src="${image.url}" alt="${image.title}">
+            <h2>${image.title}</h2>
+            <p>Категория: ${getCategoryName(image.category)}</p>
+            <p>Лайков: ${image.likes}</p>
+        </div>
+    `;
+    
+    // Показываем модальное окно
+    modal.style.display = 'flex';
+}
+
+// 9. ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+// 10. ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ
+function getCategoryName(category) {
+    const names = {
+        'nature': 'Природа',
+        'animals': 'Животные',
+        'cities': 'Города'
+    };
+    return names[category] || category;
+}
+
+// 11. ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ПО КЛИКУ НА ФОН
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+
+renderGallery();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
